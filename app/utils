@@ -1,0 +1,28 @@
+from datetime import datetime
+
+
+def parse_date(value):
+    if not value:
+        return None
+
+    formats = [
+        "%Y-%m-%d",
+        "%d-%m-%Y",
+        "%d/%m/%Y",
+        "%Y/%m/%d"
+    ]
+
+    for fmt in formats:
+        try:
+            return datetime.strptime(value, fmt)
+        except ValueError:
+            pass
+
+    return None
+
+
+def normalize_text(value):
+    if value is None:
+        return ""
+
+    return str(value).strip()
